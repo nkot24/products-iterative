@@ -30,7 +30,8 @@ class ProductController extends Controller
 
         $product = Product::create($data);
 
-        return redirect()->route('products.show', $product);
+         return redirect()->route('products.index')
+            ->with('success', 'Produkts veiksmīgi izveidots!');
     }
 
     public function show(Product $product)
@@ -55,7 +56,8 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect()->route('products.show', $product);
+        return redirect()->route('products.show', $product)
+            ->with('success', 'Produkts veiksmīgi atjaunināts!');
     }
 
     public function destroy(Product $product)

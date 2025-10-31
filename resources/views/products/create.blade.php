@@ -1,26 +1,18 @@
-<x-layout title="Jauns Produkts">
-    <h1>Pievienot produktu</h1>
+<x-layout :title="'Izveidot produktu'">
+    <x-flash-success class="mb-4"/>
+    <x-flash-errors class="mb-4"/>
 
     <form action="{{ route('products.store') }}" method="POST">
         @csrf
-        <label>Nosaukums:</label>
-        <input type="text" name="name" value="{{ old('name') }}"><br>
-
-        <label>Daudzums:</label>
-        <input type="number" name="quantity" value="{{ old('quantity', 0) }}"><br>
-
-        <label>Apraksts:</label>
-        <textarea name="description">{{ old('description') }}</textarea><br>
-
-        <label>Derīguma termiņš:</label>
-        <input type="date" name="expiration_date" value="{{ old('expiration_date') }}"><br>
-
-        <label>Statuss:</label>
-        <select name="status">
-            <option value="active" {{ old('status') === 'active' ? 'selected' : '' }}>Aktīvs</option>
-            <option value="inactive" {{ old('status') === 'inactive' ? 'selected' : '' }}>Neaktīvs</option>
-        </select><br>
-
-        <button type="submit">Saglabāt</button>
+        <input type="text" name="name" placeholder="Nosaukums" value="{{ old('name') }}" required>
+        <input type="number" name="quantity" placeholder="Daudzums" value="{{ old('quantity') }}" required>
+        <input type="text" name="description" placeholder="Apraksts" value="{{ old('description') }}">
+        <input type="number" step="0.01" name="price" placeholder="Cena" value="{{ old('price') }}" required>
+        <input type="date" name="expiration_date" value="{{ old('expiration_date') }}">
+        <select name="status" required>
+            <option value="active" @selected(old('status')=='active')>Aktīvs</option>
+            <option value="inactive" @selected(old('status')=='inactive')>Neaktīvs</option>
+        </select>
+        <button type="submit">Izveidot</button>
     </form>
 </x-layout>

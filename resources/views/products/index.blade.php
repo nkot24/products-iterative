@@ -1,4 +1,6 @@
 <x-layout title="Produkti">
+    <x-flash-success class="mb-4"/>
+    <x-flash-errors class="mb-4"/>
     <h1>Produktu saraksts</h1>
 
     <a href="{{ route('products.create') }}">+ Jauns Produkts</a>
