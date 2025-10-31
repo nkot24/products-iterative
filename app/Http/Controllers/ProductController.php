@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -22,8 +22,10 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'quantity' => 'required|integer|min:0',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
+            'expiration_date' => 'nullable|date',
+            'status' => 'required|string|in:active,inactive',
         ]);
 
         $product = Product::create($data);
@@ -45,8 +47,10 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
+            'quantity' => 'required|integer|min:0',
             'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
+            'expiration_date' => 'nullable|date',
+            'status' => 'required|string|in:active,inactive',
         ]);
 
         $product->update($data);
@@ -57,7 +61,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-
         return redirect()->route('products.index');
     }
 }
